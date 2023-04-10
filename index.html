@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+<title>Home</title>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div>
+        <h1>RELIGIONS</h1>
+    </div>
+
+    <div class="container">
+  <div class="ui-card" id="card1"></div>
+  <div class="ui-card" id="card2"></div>
+  <div class="ui-card" id="card3"></div>
+  <div class="ui-card" id="card4"></div>
+  <div class="ui-card" id="card5"></div>
+</div>
+<script>
+  //Syntax to fetch data from index.php
+  const xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("GET", "http://localhost/json_act/generate.php");
+  xmlhttp.send();
+  xmlhttp.onload = function() {
+      const religion = JSON.parse(this.responseText).religion;
+      var j=0;
+      if(religion){
+              for(var i in religion){
+                  j += 1;
+                  const items = document.getElementById(`card${j}`);
+                  const row =`
+                    <img src="${religion[i].image}">
+                    <div class="description">
+                      <h3>${religion[i].religionname}</h3>
+                      <dt><b>Leader:</b> ${religion[i].leader}</dt>
+                      <dt><b>Holy Book:</b> ${religion[i].holy_book}</dt>
+                      <p>${religion[i].history}</p>
+                      <p>${religion[i].location}</p>
+                      
+                      <div class
+                    </div>
+                  `;
+              items.innerHTML += row;
+          }
+      }
+  }
+</script>
+
+</body>
+</html>
